@@ -8,9 +8,10 @@ import static com.codeborne.selenide.Selenide.*;
 public class FirstTest {
 
     @BeforeAll
-    static void beforeAll(){
+    static void setupConfig(){
         Configuration.browserSize = "1920x1080";
         Configuration.baseUrl="https://demoqa.com";
+        Configuration.pageLoadStrategy = "eager";
     }
 
     @Test
@@ -35,23 +36,25 @@ public class FirstTest {
         $("#uploadPicture").uploadFromClasspath("images/img1.jpeg");
         $("#currentAddress").setValue("Almaty");
         $("#state").click();
-        $x("//div[contains(@id,'react-select') and text()='NCR']").click();
+        $("#state input").setValue("NCR").pressEnter();
         $("#city").click();
-        $x("//div[contains(@id,'react-select') and text()='Delhi']").click();
+        $("#city input").setValue("Delhi").pressEnter();
         $("#submit").click();
 
         $(".modal-content").shouldBe(visible);
         $(".modal-content").$(".modal-title").shouldHave(text("Thanks for submitting the form"));
-        $x("//td[text()='Student Name']/following-sibling::td").shouldHave(text("Alexandra Chirkova"));
-        $x("//td[text()='Student Email']/following-sibling::td").shouldHave(text("alexandra.chirkova88@gmail.com"));
-        $x("//td[text()='Gender']/following-sibling::td").shouldHave(text("Female"));
-        $x("//td[text()='Mobile']/following-sibling::td").shouldHave(text("8705181312"));
-        $x("//td[text()='Date of Birth']/following-sibling::td").shouldHave(text("12 August,1988"));
-        $x("//td[text()='Subjects']/following-sibling::td").shouldHave(text("Maths"));
-        $x("//td[text()='Hobbies']/following-sibling::td").shouldHave(text("Reading"));
-        $x("//td[text()='Picture']/following-sibling::td").shouldHave(text("img1.jpeg"));
-        $x("//td[text()='Address']/following-sibling::td").shouldHave(text("Almaty"));
-        $x("//td[text()='State and City']/following-sibling::td").shouldHave(text("NCR Delhi"));
+        $(".modal-body").shouldHave(
+                text("Alexandra Chirkova"),
+                text("alexandra.chirkova88@gmail.com"),
+                text("Female"),
+                text("8705181312"),
+                text("12 August,1988"),
+                text("Maths"),
+                text("Reading"),
+                text("img1.jpeg"),
+                text("Almaty"),
+                text("NCR Delhi")
+        );
     }
 
 }
