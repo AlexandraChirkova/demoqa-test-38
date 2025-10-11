@@ -3,6 +3,7 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 import static com.codeborne.selenide.Condition.*;
+import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Selenide.*;
 
 public class FirstTest {
@@ -43,18 +44,16 @@ public class FirstTest {
 
         $(".modal-content").shouldBe(visible);
         $(".modal-content").$(".modal-title").shouldHave(text("Thanks for submitting the form"));
-        $(".modal-body").shouldHave(
-                text("Alexandra Chirkova"),
-                text("alexandra.chirkova88@gmail.com"),
-                text("Female"),
-                text("8705181312"),
-                text("12 August,1988"),
-                text("Maths"),
-                text("Reading"),
-                text("img1.jpeg"),
-                text("Almaty"),
-                text("NCR Delhi")
-        );
+        $(".modal-body").shouldHave(text("Alexandra Chirkova"));
+        $(".modal-body").shouldHave(text("alexandra.chirkova88@gmail.com"));
+        $(".modal-body").shouldHave(text("Female"));
+        $(".modal-body").shouldHave(text("8705181312"));
+        $(".modal-body").shouldHave(text("12 August,1988"));
+        $(".modal-body").shouldHave(text("Maths"));
+        $(".modal-body").shouldHave(text("Reading"));
+        $(".modal-body").shouldHave( text("img1.jpeg"));
+        $(".modal-body").shouldHave(text("Almaty"));
+        $(".modal-body").shouldHave(text("NCR Delhi"));
     }
 
 }
